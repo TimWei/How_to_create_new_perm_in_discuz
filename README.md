@@ -25,7 +25,7 @@ Discuz!起於2001年，</br>
 以下將以"在用戶管理(action=members)內新增一個導出Table資料的功能"來做介紹
 
 1. 在source\language\lang_admincp.php的Hashtable中新增字串的映射
-	```			
+	```php			
 		$lang = array
 		(
 	+		// tim's custom
@@ -38,7 +38,7 @@ Discuz!起於2001年，</br>
 	```
 
 2. 首先我們要在用戶管理的子頁面頁籤新增我們的操作頁面連結，首先找到source\admincp\admincp_members.php中判斷operation的if結構式，用戶管理的頁籤原本為'searcy','clean','repeat'，在此我們要在原三個operation中皆加入頁籤。
-	```
+	```php
 		if($operation == 'search') {
 
 			if(!submitcheck('submit', 1)) {
@@ -51,7 +51,7 @@ Discuz!起於2001年，</br>
 				));
 	```
 
-	```
+	```php
 		} elseif($operation == 'repeat') {
 
 			if(empty($_GET['uid']) && empty($_GET['username']) && empty($_GET['ip'])) {
@@ -65,7 +65,7 @@ Discuz!起於2001年，</br>
 				));
 	```
 
-	```
+	```php
 		} elseif($operation == 'clean') {
 
 			if(!submitcheck('submit', 1) && !submitcheck('deletesubmit', 1)) {
@@ -80,7 +80,7 @@ Discuz!起於2001年，</br>
 	```
 3. 在判斷operation的if結構式中新增新operation的執行區塊
 
-	```
+	```php
 	+			} elseif($operation == 'tim'){
 
 	+			} elseif($operation == 'tim_post') {
@@ -93,14 +93,14 @@ Discuz!起於2001年，</br>
 
 4. 由於opertation=tim_post是匯出csv。不需要相關的html header tag，在檔案片頭的判斷式加入這個判斷
 
-	```
+	```php
 	+	if($operation != 'export' && $operation != 'tim_post') {
 	-	if($operation != 'export' ) {
 	```
 
 5. 在source\class\class_core.php中新增一Hashtable做為表單的Table白名單，之後要修改可選的table從這修改即可
 
-	```
+	```php
 			define('IN_DISCUZ', true);
 			define('DISCUZ_ROOT', substr(dirname(__FILE__), 0, -12));
 			define('DISCUZ_CORE_DEBUG', false);
@@ -112,7 +112,7 @@ Discuz!起於2001年，</br>
 
 6. 回到source\admincp\admincp_members.php中，在判斷operation的if結構式中實做operation=tim的程式區塊
 
-	```
+	```php
 		} elseif($operation == 'tim'){
 	+			// navbar and submenu
 	+			shownav('user', 'nav_members');
@@ -140,7 +140,7 @@ Discuz!起於2001年，</br>
 	```
 7. 在判斷operation的if結構式中實做operation=tim_post的程式區塊
 
-	```
+	```php
 		} elseif($operation == 'tim_post') {
 	+		if(submitcheck('submit')) {
 	+			//get selected table
@@ -190,7 +190,7 @@ Discuz!起於2001年，</br>
 	```
 8. 接下來要新增新權限的master data, 要注意的是該master data不是以數據的形式保存，而式hard code在source\admincp\admin_cp_perm.php中。 
 
-	```
+	```php
 		array_splice($menu['user'], 1, 0, array(
 			array('founder_perm_members_group', 'members_group'),
 			array('founder_perm_members_access', 'members_access'),
