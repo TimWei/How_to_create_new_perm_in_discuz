@@ -25,7 +25,7 @@ Discuz!起於2001年，</br>
 以下將以"在用戶管理(action=members)內新增一個導出Table資料的功能"來做介紹
 
 1. 在source\language\lang_admincp.php的Hashtable中新增字串的映射
-	```php diff			
+	```php			
 		$lang = array
 		(
 	+		// tim's custom
