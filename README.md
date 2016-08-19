@@ -188,7 +188,7 @@ Discuz!起於2001年，</br>
 	+			cpmsg('tim_export_post_invalid', '', 'error');
 	+		}
 	```
-8. 接下來要新增新權限的master data, 要注意的是該master data不是以數據的形式保存，而式hard code在source\admincp\admin_cp_perm.php中。 
+8. 接下來要新增新權限的master data, 要注意的是該master data不是以數據的形式保存，而是以hard code在source\admincp\admin_cp_perm.php中。 
 
 	```php
 		array_splice($menu['user'], 1, 0, array(
